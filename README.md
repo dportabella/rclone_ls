@@ -42,3 +42,8 @@ options:
 - Manually install rclone: https://rclone.org/downloads/
 - Configure your rclone remotes: https://rclone.org/commands/rclone_config/
 - `$ pip install rclone_ls`
+
+
+## ChatGPT Python Developer Assistance
+I sought assistance from ChatGPT during the the development and publication of this simple Python script, and I must say it was absolutely incredible. I'm sharing a [transcript of our conversation](chatgpt_developer_assistance.md).
+
