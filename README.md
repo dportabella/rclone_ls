@@ -4,19 +4,27 @@ List files/dirs and their sizes in a given rclone path.
 
 ## Example usage
 ```
-$ ./rclone_ls remote:/path
+$ ./rclone_ls googledrive:/backup
 8196	.DS_Store
 1747191312	books/
 1503049236	downloads/
 930638960	temp/
 total:	8225934615
 
-$ ./rclone_ls -H remote:/path
+
+$ ./rclone_ls -H googledrive:/backup
 8.2 kB	.DS_Store
 1.7 GB	books/
 1.5 GB	downloads/
 930.6 MB	temp/
 total:	2.7 GB
+
+
+$ ./rclone_ls /home/david/books
+259333833  book1.pdf
+4534544    book2.pdf
+total:  263868377
+
 
 $ ./rclone_ls -h
 usage: rclone_ls [-h] [-H] [--debug] rclone_path
@@ -33,9 +41,9 @@ options:
 ```
 
 ## Note
-- The `total` is printed in stderr. 
-  You can avoid printing by adding this to the command line: `2>/dev/null`.
-- `rclone_path` can be a local folder, such as `/home/david/books`.
+- The `total` output is printed in stderr. 
+  To prevent it from being displayed, you can add the following to the command line: `2>/dev/null`.
+- The `rclone_path` parameter can also accept a local folder path like `/home/david/books`.
 
 
 ## Installation
@@ -46,4 +54,3 @@ options:
 
 ## ChatGPT Python Developer Assistance
 I sought assistance from ChatGPT during the the development and publication of this simple Python script, and I must say it was absolutely incredible. I'm sharing a [transcript of our conversation](chatgpt_developer_assistance.md).
-

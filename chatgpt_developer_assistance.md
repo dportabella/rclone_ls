@@ -1652,3 +1652,21 @@ To build a distributable package using `setuptools`, you typically need to follo
 You have now successfully built the distributable package using `setuptools`. These distribution files can be distributed and installed using tools like `pip` or uploaded to a package repository like PyPI.
 
 It's important to note that the specific configuration and options in your `setup.py` file may vary based on your project's requirements. For more detailed information on `setuptools` and its configuration options, refer to the official `setuptools` documentation.
+
+* * *
+
+**You:**
+
+improve text:
+- The `total` is printed in stderr. 
+  You can avoid printing it by adding this to the command line: `2&gt;/dev/null`.
+- `rclone_path` can be a local folder, such as `/home/david/books`.
+
+
+* * *
+
+**ChatGPT:**
+
+* The `total` output is currently printed in stderr. To prevent it from being displayed, you can add the following to the command line: `2>/dev/null`.
+* The `rclone_path` parameter can also accept a local folder path like `/home/david/books`.
+
