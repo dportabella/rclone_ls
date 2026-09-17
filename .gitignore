@@ -1,0 +1,5 @@
+# Generats per «python -m build» i «pip install -e .»
+build/
+dist/
+*.egg-info/
+__pycache__/
