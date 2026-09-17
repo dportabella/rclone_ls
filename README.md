@@ -1,35 +1,34 @@
-# rclone_ls
+# rclone_ls_full
 
-List files/dirs and their sizes in a given rclone path.
+List every file and directory under an rclone path (or a local folder), recursively, with
+sizes, MIME types and modification times. Directory sizes are the sum of their contents.
+
+One tab-separated line per entry, so it works with `grep`, `awk` and `sort`:
+
+```
+directory <TAB> path <TAB> name <TAB> size <TAB> MIME type <TAB> modification time
+```
+
+Directories get a line of their own, after their contents, with an empty path and name, the
+total size and `dir` as the type. The last line is the root.
 
 ## Example usage
+
 ```
-$ ./rclone_ls googledrive:/backup
-8196	.DS_Store
-1747191312	books/
-1503049236	downloads/
-930638960	temp/
-total:	8225934615
+$ rclone_ls_full googledrive:/backup
+/books	book1.pdf	book1.pdf	2590000	application/pdf	2026-09-17T09:30:00.000000000+02:00
+/books			2590000	dir	2026-09-17T09:30:00.000000000+02:00
+	notes.md	notes.md	453000	text/markdown; charset=utf-8	2026-09-17T09:30:00.000000000+02:00
+			3043000	dir	2026-09-17T09:30:00.000000000+02:00
 
+$ rclone_ls_full -H googledrive:/backup
+/books	book1.pdf	book1.pdf	2.6 MB	application/pdf	2026-09-17T09:30:00.000000000+02:00
+/books			2.6 MB	dir	2026-09-17T09:30:00.000000000+02:00
+	notes.md	notes.md	453.0 kB	text/markdown; charset=utf-8	2026-09-17T09:30:00.000000000+02:00
+			3.0 MB	dir	2026-09-17T09:30:00.000000000+02:00
 
-$ ./rclone_ls -H googledrive:/backup
-8.2 kB	.DS_Store
-1.7 GB	books/
-1.5 GB	downloads/
-930.6 MB	temp/
-total:	2.7 GB
-
-
-$ ./rclone_ls /home/david/books
-259333833  book1.pdf
-4534544    book2.pdf
-total:  263868377
-
-
-$ ./rclone_ls -h
-usage: rclone_ls [-h] [-H] [--debug] rclone_path
-
-List files/dirs and their sizes in a given rclone path. For instance: rclone_ls remote:/path
+$ rclone_ls_full -h
+usage: rclone_ls_full [-h] [-H] [--debug] rclone_path
 
 positional arguments:
   rclone_path  rclone path
@@ -40,16 +39,18 @@ options:
   --debug      Enable debug mode
 ```
 
-## Note
-- The `total` output is printed in stderr. 
-  To prevent it from being displayed, you can add the following to the command line: `2>/dev/null`.
-- The `rclone_path` parameter can also accept a local folder path like `/home/david/books`.
-
+`rclone_path` can also be a local folder, like `/home/david/books`.
 
 ## Installation
-- Manually install rclone: https://rclone.org/downloads/
+
+- Install rclone: https://rclone.org/downloads/
 - Configure your rclone remotes: https://rclone.org/commands/rclone_config/
-- `$ pip install rclone_ls`
+- From this folder: `pip install -e .` (it installs the `rclone_ls_full` command and its
+  dependencies, `rclone` 2.x and `humanize`). On David's Mac it is installed in `~/.venv`, and
+  `prod/bin/comandes.py` checks that it still is.
+
+The package on PyPI, `rclone_ls` 0.0.2, is the older `rclone_ls` script: this version (0.0.3)
+has not been published.
 
 
 ## ChatGPT Python Developer Assistance
